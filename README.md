@@ -4,9 +4,29 @@ Redux Nylas middleware makes it super easy to make Nylas API calls in redux acti
 
 ### Setup
 
+Install
 ```
 npm install redux-nylas-middleware --save
 ```
+
+Add the middleware when you create your store:
+```
+import { createStore, applyMiddleware } from 'redux'
+import createNylas from 'redux-nylas-middleware'
+
+const nylas = createNylas()
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    nylas,
+    logger
+  )
+)
+```
+
+
+### Setting the Auth Token
 
 The middleware provides two actions to help manage your token (`setToken` and `clearToken`).  Import the actions into whatever container you will be using them in and put them in mapDispatchToProps.
 ```
