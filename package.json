@@ -4,9 +4,11 @@
   "description": "Redux middleware for calling the Nylas API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run unit-test && npm run eslint",
+    "unit-test": "jest",
     "lib": "node_modules/.bin/babel src -d .",
-    "prepublish": "npm run lib"
+    "prepublish": "npm run lib",
+    "eslint": "node_modules/.bin/eslint src"
   },
   "repository": {
     "type": "git",
