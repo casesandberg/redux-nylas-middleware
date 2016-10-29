@@ -8,13 +8,23 @@ export const NYLAS_API = 'NYLAS/API'
 export const SET_TOKEN = 'NYLAS/SET_TOKEN'
 export const CLEAR_TOKEN = 'NYLAS/CLEAR_TOKEN'
 
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) { return response }
+  const error = new Error(response.statusText)
+  error.response = response
+  throw error
+}
+
+function parseJSON(response) { return response.json() }
+
 function api({ endpoint, method, token, body, options }) {
   return fetch(options.baseURL + endpoint, {
     method: method || options.method,
     headers: options.headers || { 'Authorization': `Bearer ${ token }` },
     body: body ? JSON.stringify(body) : null,
   })
-  .then(data => data.json())
+  .then(checkStatus)
+  .then(parseJSON)
 }
 
 export default (opts = {}) => () => next => (action) => {

@@ -24,6 +24,13 @@
     "url": "https://github.com/casesandberg/redux-nylas-middleware/issues"
   },
   "homepage": "https://github.com/casesandberg/redux-nylas-middleware#readme",
+  "jest": {
+    "setupFiles": [
+      "__tests__/__mocs__/localStorage.js",
+      "__tests__/__mocs__/fetch.js"
+    ],
+    "testRegex": "spec.js$"
+  },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-eslint": "^6.1.2",
@@ -34,6 +41,10 @@
     "eslint-config-airbnb": "^11.2.0",
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.3.0"
+    "eslint-plugin-react": "^6.3.0",
+    "jest": "^16.0.2",
+    "jest-fetch-mock": "^1.0.6",
+    "redux": "^3.6.0",
+    "redux-mock-store": "^1.2.1"
   }
 }
