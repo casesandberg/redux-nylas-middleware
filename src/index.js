@@ -33,7 +33,7 @@ export default (opts = {}) => () => next => (action) => {
 
   const options = { ...defaults, ...opts }
   const token = localStorage.getItem(tokenKey) || null
-  const { endpoint, endpoints, types, method, body } = apiAction
+  const { endpoint, endpoints, types, method, body, model } = apiAction
   const [REQUEST, SUCCESS, ERROR] = types
 
   next({ type: REQUEST })
@@ -47,7 +47,7 @@ export default (opts = {}) => () => next => (action) => {
   )
 
   return apiCall
-    .then(response => next({ type: SUCCESS, response }))
+    .then(response => next({ type: SUCCESS, [model || 'response']: response }))
     .catch(error => next({ type: ERROR, error }))
 }
 
