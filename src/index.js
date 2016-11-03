@@ -36,7 +36,7 @@ export default (opts = {}) => () => next => (action) => {
   const { endpoint, endpoints, types, method, body, model } = apiAction
   const [REQUEST, SUCCESS, ERROR] = types
 
-  next({ type: REQUEST })
+  REQUEST && next({ type: REQUEST })
 
   const apiCall = endpoints ? (
     Promise.all(endpoints.map(singleEndpoint =>
@@ -47,8 +47,8 @@ export default (opts = {}) => () => next => (action) => {
   )
 
   return apiCall
-    .then(response => next({ type: SUCCESS, [model || 'response']: response }))
-    .catch(error => next({ type: ERROR, error }))
+    .then(response => SUCCESS && next({ type: SUCCESS, [model || 'response']: response }))
+    .catch(error => ERROR && next({ type: ERROR, error }))
 }
 
 export const actions = {
