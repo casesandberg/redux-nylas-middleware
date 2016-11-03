@@ -2,6 +2,7 @@ const tokenKey = 'access_token'
 const defaults = {
   baseURL: 'https://api.nylas.com/',
   method: 'GET',
+  storage: localStorage,
 }
 
 export const NYLAS_API = 'NYLAS/API'
@@ -32,7 +33,8 @@ export default (opts = {}) => () => next => (action) => {
   if (typeof apiAction === 'undefined') { return next(action) }
 
   const options = { ...defaults, ...opts }
-  const token = localStorage.getItem(tokenKey) || null
+  const { storage } = options
+  const token = storage.getItem(tokenKey) || null
   const { endpoint, endpoints, types, method, body, model } = apiAction
   const [REQUEST, SUCCESS, ERROR] = types
 
@@ -53,11 +55,11 @@ export default (opts = {}) => () => next => (action) => {
 
 export const actions = {
   setToken: (token) => {
-    localStorage.setItem(tokenKey, token)
+    // storage.setItem(tokenKey, token)
     return ({ type: SET_TOKEN, token })
   },
   clearToken: () => {
-    localStorage.removeItem(tokenKey)
+    // storage.removeItem(tokenKey)
     return ({ type: CLEAR_TOKEN, token: null })
   },
 }
