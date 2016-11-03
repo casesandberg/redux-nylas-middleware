@@ -1,3 +1,7 @@
+## 0.1.4
+
+- Change Storage Options [524a498](https://github.com/casesandberg/redux-nylas-middleware/commit/524a49875a6fb69269df02c92a3d34c626004a6a)
+
 ## 0.1.3
 
 - Only call action if type is provided [b0ff168](https://github.com/casesandberg/redux-nylas-middleware/commit/b0ff168e3437bf96e84fde41888b78e6edee72a0)
