@@ -35,10 +35,10 @@ export default (opts = {}) => () => next => (action) => {
   const options = { ...defaults, ...opts }
   const { storage } = options
   const token = storage.getItem(tokenKey) || null
-  const { endpoint, endpoints, types, method, body, model } = apiAction
+  const { endpoint, endpoints, types, method, body, model, passthrough } = apiAction
   const [REQUEST, SUCCESS, ERROR] = types
 
-  REQUEST && next({ type: REQUEST })
+  REQUEST && next({ type: REQUEST, ...passthrough })
 
   const apiCall = endpoints ? (
     Promise.all(endpoints.map(singleEndpoint =>
@@ -49,17 +49,17 @@ export default (opts = {}) => () => next => (action) => {
   )
 
   return apiCall
-    .then(response => SUCCESS && next({ type: SUCCESS, [model || 'response']: response }))
-    .catch(error => ERROR && next({ type: ERROR, error }))
+    .then(response => SUCCESS &&
+      next({ type: SUCCESS, [model || 'response']: response, ...passthrough })
+    )
+    .catch(error => ERROR && next({ type: ERROR, error, ...passthrough }))
 }
 
 export const actions = {
   setToken: (token) => {
-    // storage.setItem(tokenKey, token)
     return ({ type: SET_TOKEN, token })
   },
   clearToken: () => {
-    // storage.removeItem(tokenKey)
     return ({ type: CLEAR_TOKEN, token: null })
   },
 }
