@@ -1,5 +1,9 @@
 ## 0.1.4
 
+- Add passthrough to Action Success / Failure
+
+## 0.1.4
+
 - Change Storage Options [524a498](https://github.com/casesandberg/redux-nylas-middleware/commit/524a49875a6fb69269df02c92a3d34c626004a6a)
 
 ## 0.1.3
