@@ -30,7 +30,7 @@ function api({ endpoint, method, token, body, options }) {
 
 export default (opts = {}) => () => next => (action) => {
   const apiAction = action && action[NYLAS_API]
-  if (typeof apiAction === 'undefined') { return next(action) }
+  if (typeof apiAction === 'undefined' || !apiAction) { return next(action) }
 
   const options = { ...defaults, ...opts }
   const { storage } = options
