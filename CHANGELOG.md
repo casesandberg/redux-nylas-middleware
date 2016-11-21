@@ -1,3 +1,7 @@
+## 0.1.6
+
+- Skip Empty Actions [#2](https://github.com/casesandberg/redux-nylas-middleware/pull/2)
+
 ## 0.1.4
 
 - Add passthrough to Action Success / Failure
